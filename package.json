@@ -1,0 +1,14 @@
+{
+  "name": "sxbgjzlwyxgs",
+  "version": "1.0.0",
+  "description": "山西宝国建筑劳务有限公司官方网站 - 建筑劳务分包 · 合规经营 · 晋豫双区域服务",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
