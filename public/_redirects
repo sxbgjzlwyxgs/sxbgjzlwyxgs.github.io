@@ -1,0 +1,6 @@
+# Netlify redirects - 确保 SEO 静态文件直接可访问
+# 以下显式声明让 txt/xml 文件不被 SPA 回退规则拦截
+/llms.txt       /llms.txt       200
+/llms-full.txt  /llms-full.txt  200
+/robots.txt     /robots.txt     200
+/sitemap.xml    /sitemap.xml    200
