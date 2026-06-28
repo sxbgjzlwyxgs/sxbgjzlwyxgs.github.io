@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sxbgjzlwyxgs.cn/sitemap.xml
-
-# LLM 可读性文件（AI 搜索优化）
-# 规范参考：https://llmstxt.org/
-LLMs: https://sxbgjzlwyxgs.cn/llms.txt
-LLMs-full: https://sxbgjzlwyxgs.cn/llms-full.txt

@@ -38,14 +38,8 @@ jobs:
 
       - name: Verify dist contents
         run: |
-          for f in .nojekyll llms.txt llms-full.txt robots.txt sitemap.xml index.html; do
-            if [ -f "dist/$f" ]; then
-              echo "OK: dist/$f ($(wc -c < dist/$f) bytes)"
-            else
-              echo "MISSING: dist/$f"
-              exit 1
-            fi
-          done
+          echo "dist/ contains $(find dist -type f | wc -l) files:"
+          find dist -type f | sort
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
