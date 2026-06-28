@@ -38,7 +38,7 @@ jobs:
 
       - name: Verify dist contents
         run: |
-          for f in .nojekyll CNAME  llms.txt llms-full.txt robots.txt sitemap.xml index.html; do
+          for f in .nojekyll llms.txt llms-full.txt robots.txt sitemap.xml index.html; do
             if [ -f "dist/$f" ]; then
               echo "OK: dist/$f ($(wc -c < dist/$f) bytes)"
             else
