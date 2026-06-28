@@ -55,6 +55,20 @@ jobs:
             -cvf "$RUNNER_TEMP/artifact.tar" \
             -C ./dist .
 
+      - name: Verify tar contents
+        run: |
+          echo "=== tar file listing ==="
+          tar -tvf "$RUNNER_TEMP/artifact.tar"
+          echo "=== checking key files in tar ==="
+          for f in .nojekyll llms.txt llms-full.txt robots.txt sitemap.xml; do
+            if tar -tf "$RUNNER_TEMP/artifact.tar" | grep -q "^\./$f$"; then
+              echo "OK in tar: $f"
+            else
+              echo "MISSING in tar: $f"
+              exit 1
+            fi
+          done
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -64,3 +78,13 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Smoke test deployed URLs
+        run: |
+          echo "Waiting 30s for Pages CDN to propagate..."
+          sleep 30
+          BASE="${{ steps.deployment.outputs.page_url }}"
+          for path in llms.txt llms-full.txt robots.txt sitemap.xml; do
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${BASE}${path}" || echo "000")
+            echo "${path}: HTTP ${HTTP_CODE}"
+          done
