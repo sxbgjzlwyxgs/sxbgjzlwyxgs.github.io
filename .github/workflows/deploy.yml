@@ -36,13 +36,30 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify dist (SEO files + dotfiles)
+        run: |
+          echo "=== dist root files ==="
+          ls -la dist/
+          echo "=== checking key files ==="
+          for f in .nojekyll llms.txt llms-full.txt robots.txt sitemap.xml; do
+            if [ -f "dist/$f" ]; then echo "OK: dist/$f"; else echo "MISSING: dist/$f"; fi
+          done
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      - name: Create tar artifact (include dotfiles)
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            -C ./dist .
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          path: './dist'
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
 
       - name: Deploy to GitHub Pages
         id: deployment
