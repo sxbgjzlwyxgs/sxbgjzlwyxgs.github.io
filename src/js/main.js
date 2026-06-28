@@ -221,8 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---------- 百度站长自动推送 ----------
 // 上线后取消注释即可启用，无需额外配置
 function initBaiduAutoPush() {
-  // 自动推送（上线后取消下面 return 语句即可启用）
-  // return;
   (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
